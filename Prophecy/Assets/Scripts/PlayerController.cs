@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask movementMask;
 
+    public Interactable focus;
+
     PlayerMotor motor;
 
 
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Left mouse hit:  " + hit.collider.name + " " + hit.point);
 
                 motor.MoveToPoint(hit.point);
+
+                RemoveFocus();
             }
         }
 
@@ -45,8 +49,38 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Right mouse hit:  " + hit.collider.name + " " + hit.point);
 
-                // check if we hit an interactive object. Set as focus.
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+                if(interactable != null)
+                {
+                    SetFocus(interactable);
+                }
             }
         }
+    }
+
+    void SetFocus(Interactable newFocus)
+    {
+
+        if(newFocus != focus)
+        {
+            if(focus != null)
+                focus.OnDefocused();
+
+            focus = newFocus;
+            motor.FollowTarget(newFocus);
+        }
+
+        newFocus.OnFocus(transform);
+
+    }
+
+    void RemoveFocus()
+    {
+        if(focus != null)
+            focus.OnDefocused();
+
+        focus = null;
+        motor.StopFollowingTarget();
     }
 }
