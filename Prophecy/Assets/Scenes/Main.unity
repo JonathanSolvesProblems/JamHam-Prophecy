@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 53551652}
   - component: {fileID: 53551653}
   - component: {fileID: 53551654}
+  - component: {fileID: 53551656}
   - component: {fileID: 53551655}
   m_Layer: 0
   m_Name: Player
@@ -528,25 +529,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785d5cf8a76f71c4cbf7f001d545bdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &53551655
-Animator:
-  serializedVersion: 3
+--- !u!114 &53551655
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53551648}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 59f50b1543052c241a9e97bc55cba552, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab21603423536d4c9f98324b5d73c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage:
+    baseValue: 5
+  armor:
+    baseValue: 0
+--- !u!114 &53551656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53551648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2575c7b5fd029264583b9dfb2de51d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage:
+    baseValue: 0
+  armor:
+    baseValue: 0
 --- !u!1001 &72973981
 PrefabInstance:
   m_ObjectHideFlags: 0
