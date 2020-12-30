@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee24cec763394446939072410026352, type: 3}
-  m_Name: Test Item
+  m_Name: MagicShield
   m_EditorClassIdentifier: 
-  name: Magic Staff
-  icon: {fileID: 0}
+  name: Magic Shield
+  icon: {fileID: 21300000, guid: d39728d02dcc718429190fc3b1b66273, type: 3}
   isDefaultItem: 0

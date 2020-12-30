@@ -10,7 +10,8 @@ public class Item : ScriptableObject
     public Sprite icon = null; // item to show in our inventory.
     public bool isDefaultItem = false;
 
-
-
-
+    public virtual void Use()
+    {
+        Debug.Log("Using " + name);
+    }
 }

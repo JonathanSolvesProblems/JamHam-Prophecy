@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
-    public int space = 20; // limited space for inventory
+    public int space = 25; // limited space for inventory
 
     // delegate, can subscribe methods to (like observer pattern)
     public delegate void OnItemChanged();
@@ -56,5 +56,11 @@ public class Inventory : MonoBehaviour
     public void Remove(Item item)
     {
         items.Remove(item);
+
+        if(onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
     }
+
 }
