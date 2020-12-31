@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 public class EnemyAI : MonoBehaviour
 {
+
     private NavMeshAgent agent;
 
     private Transform player;
@@ -36,6 +37,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+
     }
 
     private void Update()

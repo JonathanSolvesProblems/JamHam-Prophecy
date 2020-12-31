@@ -7,7 +7,14 @@ public class Rewind : MonoBehaviour
 {
     public bool isRewinding = false;
 
+    private AudioSource slowmo;
+
+    // private int coolDownTime;
+    // private int tracker;
+
     public Text text;
+
+    public Text coolDownText;
 
     List<Vector3> positions;
 
@@ -16,12 +23,17 @@ public class Rewind : MonoBehaviour
     void Start()
     {
         positions = new List<Vector3>(); // different positions in point of time
+        // coolDownTime = 5;
+        // tracker = 5;
+        // coolDownText.text = "Cooldown Time: " + tracker;
         text.enabled = false;
+
+        slowmo = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
-        if(isRewinding)
+        if (isRewinding)
             ActionRewind();
         else
             Record();
@@ -29,8 +41,9 @@ public class Rewind : MonoBehaviour
 
     void ActionRewind()
     {
-        if(positions.Count > 0)
+        if (positions.Count > 0)
         {
+            // tracker -= (int)Time.deltaTime;
             transform.position = positions[0];
             positions.RemoveAt(0);
         }
@@ -38,8 +51,6 @@ public class Rewind : MonoBehaviour
         {
             StopRewind();
         }
-
-        
     }
 
     void Record()
@@ -49,14 +60,32 @@ public class Rewind : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            // coolDownTime -= (int)Time.deltaTime;
+
+            
             StartRewind();
-        if(Input.GetKeyUp(KeyCode.Return))
+        }
+
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
             StopRewind();
+            // if(coolDownTime < 5)
+            // {
+            //     coolDownTime += (int)Time.deltaTime;
+            //     tracker++;
+            // }
+        }
+
+        //  coolDownText.text = "Cooldown Time: " + tracker;
     }
 
     public void StartRewind()
     {
+        slowmo.Play();
         isRewinding = true;
         text.enabled = true;
     }
