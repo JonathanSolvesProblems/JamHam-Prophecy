@@ -39,6 +39,15 @@ public class PlayerMotor : MonoBehaviour
         {
             anim.SetBool("isRunning", true);
         }
+
+        if(Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("isJumping", true);
+        }
+        else
+        {
+            anim.SetBool("isJumping", false);
+        }
     }
 
     // Checks to see if the path has been reached.
