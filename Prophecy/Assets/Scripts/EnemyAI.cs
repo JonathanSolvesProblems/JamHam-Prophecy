@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 public class EnemyAI : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -45,6 +46,19 @@ public class EnemyAI : MonoBehaviour
         if (!playerInsightRange && !playerInAttackRange) Patrolling();
         if (!playerInsightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInsightRange) AttackPlayer();
+
+        if(CheckDistance())
+            SceneManager.LoadScene(2);
+    }
+
+    private bool CheckDistance()
+    {
+        float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+
+        if (distance <= 1.8)
+            return true;
+
+        return false;
     }
 
     private void Patrolling()
@@ -52,14 +66,14 @@ public class EnemyAI : MonoBehaviour
         anim.SetBool("isRunning", false);
         anim.SetBool("isAttack", false);
 
-        if(!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet) SearchWalkPoint();
 
-        if(walkPointSet)
+        if (walkPointSet)
             agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if(distanceToWalkPoint.magnitude < 1f)
+        if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
     }
 
@@ -71,7 +85,7 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z);
 
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
             walkPointSet = true;
     }
 
@@ -91,7 +105,7 @@ public class EnemyAI : MonoBehaviour
 
         transform.LookAt(player);
 
-        if(!alreadyAttacked)
+        if (!alreadyAttacked)
         {
             // add type of attack code here, shooting, sword, etc.
             // Can add melee here or magic spells 
