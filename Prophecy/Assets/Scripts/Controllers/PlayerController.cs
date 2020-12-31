@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
+        
     }
 
     void Update()
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, 100, movementMask))
             {
-                Debug.Log("Left mouse hit:  " + hit.collider.name + " " + hit.point);
+                // Debug.Log("Left mouse hit:  " + hit.collider.name + " " + hit.point);
 
                 motor.MoveToPoint(hit.point);
 
@@ -51,7 +52,8 @@ public class PlayerController : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, 100))
             {
-                Debug.Log("Right mouse hit:  " + hit.collider.name + " " + hit.point);
+                // Debug.Log("Right mouse hit:  " + hit.collider.name + " " + hit.point);
+
 
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
 

@@ -4,27 +4,59 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // unity automatically adds nav mesh agent when using this component
-[RequireComponent(typeof(NavMeshAgent))] 
+[RequireComponent(typeof(NavMeshAgent))]
 public class PlayerMotor : MonoBehaviour
 {
     NavMeshAgent agent;
 
     Transform target;
 
+    public GameObject player;
+
+    private Animator anim;
+
 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = player.GetComponent<Animator>();
     }
 
     void Update()
     {
-        if(target != null)
+        if (target != null)
         {
             agent.SetDestination(target.position);
             FaceTarget();
         }
+
+        if(CheckPathReached())
+        {
+            anim.SetBool("isRunning", false);
+        }
+        else
+        {
+            anim.SetBool("isRunning", true);
+        }
+    }
+
+    // Checks to see if the path has been reached.
+    private bool CheckPathReached()
+    {
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    // reached
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void MoveToPoint(Vector3 point)
@@ -44,6 +76,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void StopFollowingTarget()
     {
+
         agent.stoppingDistance = 0;
 
         agent.updateRotation = true;
